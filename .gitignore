@@ -6,3 +6,5 @@
 *.toc
 
 .emacs.desktop
+
+_minted-MachineLearning/
