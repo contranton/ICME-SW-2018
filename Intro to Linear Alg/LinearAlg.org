@@ -1,0 +1,264 @@
+#+TITLE: Linear Algebra in AI - Margot Gerritsen
+
+
+* Data Science Primer
+What's _Big Data_?
+Data Science is the transition from 1 to 2
+** 1. Collecting *large* amounts of data, heterogenous and transient usually
+   Computers, sensors, people, events
+** 2. Doing something *beneficial* with it
+   Making *decisions*, confirming hypotheses, gaining _insights_, forecasting
+
+** Current-day applications
+- Concerns on privacy, ethics, fairness what with "Fake news", social media manipulation
+- IoT is the next big thing! _Everything_ is connected through sensors, computers, and lotsa _data science_.
+- Earth Observing System -- Interconnected satellites; huge system with lots of data. REvolutionary when it happened!
+- Applications in Ocean health. 500k+ sensors in the ocean (many mammal-driven!)
+- Personalized Healthcare - Machine Learning on personal data (historials, genetics) to better match health patterns
+- Fraud detection. Rather than finding patterns, ML looks for _anomalies_!
+- NSA also wants to find anomalies. One of the biggest investors in machine learning!
+** Main Fields within Data Science:
+*** Basic Data Manipulation, generation, and analysis
+**** Performing well-defined computations or asking well-defined questions
+*** Data Mining
+**** Looking for previously unknown patterns in data, or for anomalies
+**** Only fitting patterns! There are no many new insights gained from this.
+**** Fourier Transforms, Wavelets, _that's_ data mining! In Data Science we use plenty more kernels
+**** We'll look at how to find the most _important elements_ of data; the most _common patterns, similarities_
+***** The _Cosine_ rule -- In higher dimensions, dot products give us angles-between, and thus similarity-between, vectors!
+***** This is all that modern computers do! Inner products all day!
+*** Machine Learning
+**** Using data to make predictions - extrapolation!
+**** If Data Mining is getting the data, ML is using the data to either interpolate or extrapolate
+***** It's indeed creating new data!
+**** Includes deep learning and multi-layered neural networks
+*** Artificial Intelligence
+** Multiple Stages of a Data Science project
+*** Steps:
+_Underline_ -> Data Wrangling. 90% of the effort!
+1. Collect/extract
+2. _Access_ (hard!)
+3. _Organize_
+4. _Understand_ - disambiguate ("metadata hospital")
+5. _Fix_
+6. _Enrich_
+7. Analyze
+8. Use
+9. Present/visualize the daat
+10. ???
+11. Profit!
+
+*** (Important!) All of this while being
+- Unbiased
+- Fair/just
+- *Reproducible*!
+
+How do we sample fairly? Even while taking different subsets of a large dataset, *results should be the same*
+Papers should be able to prove that their results are reproducible
+** Correlation and Causation
+*** Correlation: Values *track* each other
+    [[http://www.tylervigen.com][Spurious Correlations]]
+*** Causation: Values *directly affect* each other
+    A lot harder to figure out
+*** Dangers
+    If we don't *understand* the data, ML algorithms will give *misleading conclusions!*
+** Underfitting
+Patterns that are too simplistic for the data
+Examples: Linear fit on quadratic data, ignoring outliers
+Topological data analysis becomes a game-changer in improving this
+** Overfitting
+   When data is overly specific to the given data-set
+** Crisis of trust in data science
+- Very low confidence level in science in the world.
+- Feeling that one is tied to something they don't understand.
+- _Fear_ in the singularity. What if the AI becomes so complex that they gain their own mind?
+- People can now data-mine public information (e.g. Google StreetView) to infer private information
+- Unfair practices - Low-income neighborhood charged premiums for insurance.
+- Biased training data leaving out minorities. Bias just creeps in!
+- "War on Science"
+- *We _must_ check for reproducibility*
+- Rather than using data to _prove_ a hypothesis, nowadays we _create_ hypotheses from data which are proven not-wrong from *the same data*!! Confirmation bias
+- Current-day data science output is mostly flawed! Be exceedingly critical of data science results.
+- Very fast throughput of "results" means very fast rate of re-adoption and re-adaptation, causing uneeded changes behavior for the sake of marginal gains.
+- We mustn't lazily use data science tools for any applicable fields - We must understand both our tools and our area of interest before we can make any sort of claim 
+
+** Data Sensibility and accuracy
+*** Error
+    Error bars are ubiqutous! Their absence is a warning sign of bad science
+*** Perturbation analysis
+    Purposefuly introducing erros to analyze stability of algorithms
+
+* Linear Algebra in AI
+Margot Gerritsen, ICME Stanford
+Dutch, studied in Colorado and PhD @ Stanford
+Taught in New Zealand
+** Initial comments
+If you know Linear Algebra, you can learn AI!
+Two schools of AI: Matrix and Graph school.
+Principal-Values -> Singular value decomposition
+
+* Applications of Linear Algebra
+** Searching
+*** Term-Document matrices
+An engine must find all the pages and then *rank* them
+How can google find 220k, rank them, and format them nicely??
+Let's pretend the internet only has 5 pages with a very limited vocabulary
+
+Term-Document matrix:
+
+|          | espn | tedx | berkeley | baking | muppets |
+|----------+------+------+----------+--------+---------|
+| stanford |    1 |    1 |        0 |      0 |       0 |
+| beating  |    1 |    0 |        0 |      1 |       0 |
+| cal      |    1 |    0 |        1 |      0 |       0 |
+| eggs     |    0 |    0 |        0 |      1 |       1 |
+|          |      |      |          |        |         |
+
+Google's matrix has at least 25 billion documents (search 'and' and see how many results there are) and the english language has over 500k words. This means that the matrix has over 1.25e16 entries! Now, also consider: mispellings, names, aliases, conjugations.
+
+This one matrix has all the information google has on the internet!
+
+Netflix might have something akin to a Movie-Person matrix, a Movie-Location matrix, etc. 
+
+These are what's used for data mining.
+
+*Every page is a vector* in the many-dimensional space of search terms. Dot-products, orthogonality -- it's all used.
+
+*** The query vector
+Let's search for "Stanford Eggs". This vector is:
+| 1 |
+| 0 |
+| 0 |
+| 1 | 
+How do we find the best result? We look for the page-vector _closest_ to our query. With no exact matches, we use the magic of the dot products!!
+
+Dot product with the search query
+|               | espn | tedx | berkeley | baking | muppets |
+|---------------+------+------+----------+--------+---------|
+| inner-product |    2 |    1 |        0 |      1 |       1 |
+| angle         |      |      |          |        |         |
+
+Naively, we could compute the inner-product for all webpages, but this would require trillions of operations and is unfeasible! How do we reduce the dataset? Basis vectors! For this, one could use gaussian elimination, but it is not sensitive to perturbations.
+
+*QR decomposition* is the best way to go! There are Gramm-Schmitt algorithms especially designed for sparse data, but it's not an operation that can be performed on real time. However, we still have way too many basis vectors! This still leaves us with 10 million basis vectors. Google will only look at the most representative basis vectors using Singular Value Decompositions.
+
+Web spiders check for new pages a few times during the day through hyperlink crawlers and Google performs a new QR once enough new pages have been found or existing pages modified.
+  
+*** Superhigh-dimensional search
+    When looking at an aquarium, if we want to estimate which blue fish from a bunch of blue fishes is closest to a red fish, we must *move around* so as to better visualize the 3D space. The _projection_ of the 3D-space on our 2D viewpoint is always distorted. Now imagine trying to reduce millions of dimensions!
+
+*Google reduces a 10 million-dimensional space to only 20!*
+
+It is necessary to choose a projection that minimizes this distortion. This optimization problem is best solved by the Singular Valid Decompositions! However, there is always a compromise between accuracy and efficiency.
+
+In the end, Google calculates millions of dot products, but only 20 elements long. These vectors, being highly distorted, are the reason that sometimes we may get 'bogus' results.
+
+** Ranking
+We don't use the angles for ranking. Why is this? 
+The angles we calculate in the projected space to find the pages are _heavily distorted_ from the actual space. How do we proceed, then?
+*** Ranking methods
+Main question: /is it scalable/? An algorithm is only as good as its worst case scenario.
+**** Word relevance indexing :/
+     Difficult -- Why would the layman care about 'QR decomposition'?
+     Purely content-base indexing is unreliable
+**** Connectivity Graphs :)
+     Gauge importance of websites by how often it's referenced by other websites.
+*** Factors that affect ranking
+- The *page rank*
+- Number of visits
+- Age
+- Recent edits
+- Hundreds more!
+*** Personalized projections
+    Promising but very expensive idea. We do, however, already have personalized _ranking_ -- if you visited certain sites in the past, they'll be highly ranked next time. Involuntary biasing!
+
+    However, due to this we're seeing a lot more clustering in the web, instead of the unification we hoped to see.
+*** Page Rank Algorithm
+**** The hyperlink system
+     We can't rank on outgoing links since one could easily cheat this by aggregating links in a single page.
+     We can't rank on just incoming links, since a market could be created for link aggregation by others.
+**** "Sharing Importance"
+     A website with lots of incoming links ('important') links to our website, thus increasing our own site's importance, but *only as much as they share us in relation to everyone else they share*. 
+     This system doesn't take into account location, communities, subcultures.
+**** Example
+Considering the following network:
+#+BEGIN_SRC plantuml :file graph_1.png
+
+6 <|-- 2: 1/2
+2 <|-- 1: 1/3
+3 <|-- 2: 1/2
+3 <|-- 1: 1/3
+4 <|-- 3: 1
+4 <|-- 1: 1/3
+4 <|-- 5: 1
+5 <|-- 4: 1
+
+#+END_SRC
+
+#+RESULTS:
+[[file:graph_1.png]]
+***** Bad Node types
+****** Pityful site
+(1) is a 'pityful site' since no other sites link to it
+****** Mutual admiration society
+(4) and (4) form this, as they only link between each other forming an isolated cluster
+****** Selfish
+(6) is a 'selfish' node, as it accepts connections but it doesn't look outside
+***** Propagation Matrix
+Writing the system equations for the rank, we describe the system:
+
+- x_1 = 0
+- x_2 = 1/3\cdot x_1
+- x_3 = 1/2\cdot x_2+1/3\cdot x_1
+- x_4 = x_3+x_5
+- x_5 = x_4
+- x_6 = 1/2\cdot x_2
+
+| x_1 |   |   0 |   0 | 0 | 0 | 0 | 0 |   | x_1 |
+| x_2 |   | 1/3 |   0 | 0 | 0 | 0 | 0 |   | x_2 |
+| x_3 |   | 1/3 | 1/2 | 0 | 0 | 0 | 0 |   | x_3 |
+| x_4 | = |   0 |   0 | 1 | 0 | 1 | 0 | * | x_4 |
+| x_5 |   |   0 |   0 | 0 | 1 | 0 | 0 |   | x_5 |
+| x_6 |   |   0 | 1/2 | 0 | 0 | 0 | 0 |   | x_6 |
+
+This system satisfies $x=Px$
+Every column should add up to 1, and this is the reason the largest eigenvalue is 1
+
+Plotting these matrices in SpyPlots (On or Off whether an element is non-zero or not) makes it easy to find anomalies:
+****** Zero Columns \rightarrow Selfish Nodes
+****** Zero Rows \rightarrow Pityful Nodes
+***** Fixing the mean nodes to make the algorithm robust
+The basic idea is to /break up clusters/ so as to avoid a Markov Process 'getting stuck'
+****** Pityful Nodes:
+       Add some initial importance as given by 1/n
+****** Selfish Nodes:
+       Assume it links to everybody else so as to give it 1/n importance
+****** MAS:
+       Connect either one of them to all other nodes
+*** Uses besides ranking the internet
+- Finding political influencers in social media
+- Looking for terrorism
+- Measuring company connectivity -- finding most efective managers through email chains
+*** Personalization
+    Connection weights can be personalized to add a bias to interests. Especially in the process of breaking up clusters, instead of dividing weights equally, we add more weights to related websites. Area of current research!
+** Recommendation
+*** A note about recommender systems
+These systems, like Netflix and Amazon, don't work in isolation! If you sign in using an email address, whatever you /also/ do with that email address is integrated to personalize everything.
+
+Netflix recommendation systems take into account not just your rating; your rating is /amplified/ by your behavior -- whether you binge-watched a series or not, how often you watch, etc.
+
+*** Mode of Operation
+Matrix Completion: Recommender systems look for other people who share similar interests and looks for movies or products one has browsed that the other hasn't.
+
+Same principles of searching: Basis vector decomposition, low-dimensional projection, dot product calculation!
+** Summary
+   - QR (Similarity)
+   - Clustering
+   - Projection
+* Matrix Games
+Let's go the other way around -- turning matrices into graphs. Making the resulting graphs understandable and appealing is a whole discipline in itself. Check out Tim Davis' work on turning 'musical' matrices onto graphs.
+
+This can allow us to change our perspective from just columns of categories and subcategories to a visual network that give us an immediate sense of a system. Look for the Library of Congress catalog graph.
+
+Relaxation algorithm for graphs analog to physical systems: charged nodes (repel each other) connected by springs (which connect them) whose stiffness is determined by the importance of the connection. Solve by *minimizing energy*.
+

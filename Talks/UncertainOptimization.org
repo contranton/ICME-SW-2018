@@ -1,0 +1,30 @@
+#+TITLE: Optimization under uncertainty
+
+* Stochastic optimization
+
+Optimization problems may be parametrized, but these parametrizations may be /random variables/, such that the usual notation $\min f(x,\xi)$ where $\xi$ distributes randomly.
+
+We could obtain solutions for multiple $\xi$ values, but it's not clear that their combination would give good results.
+
+We must formulate well-defined problems that incorporate the stochasticity of $xi$.
+
+An option for dealing with this is minimizing the /expected value/ of the stochastic function, and that the restriccions are fulfilled with a fixed probability \alpha.
+
+The resulting problem, EQUATION, is well defined but it may be very hard to solve.
+
+Suppose a linear restriction a^Tx >= b where a is a multivariate random distribution. FOr the previous restriction, the value a^Tx is a number with its own distribution. We can then normalize the restriction when dealing with normal distributiosn, and use the 0-1 normal to easily restate the restriction as a^Tx >= b - \Phi^{-1}(1-\alpha)*\sigma.
+
+** Two-stage linear models
+One variable is defined at some time, and another at a different time, depending on the first one.
+
+Total optimization involves optimizing today's cost and the expectation of tomorrow's cost. This expectation may be hard to compute, so we usually reformulate it as a linear combination of probabilities of ocurrence and their costs for all possible scenarios.
+
+Master problem and subproblems per scenario. The master problem produces a proposal that's evaluated by each subproblem.
+
+** Mean-variance models
+Methods for portfolio investment that maximize return while mainting difersification.
+
+** Uncertainty over uncertainty
+What if we aren't sure how $\xi$ distributes?
+
+Distributionally robust optimization: Minimize the maximal expectation for all possible models.
