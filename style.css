@@ -1,0 +1,21 @@
+.bg-image {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/a4/Mandel_zoom_11_satellite_double_spiral.jpg");
+    opacity: 0.1;
+}
+
+h1 {
+    color: blue;
+}
+
+.intro {
+    font-family: times-new-roman;
+    font-size: 14pt;
+    color: red;
+    width: 50%;
+}
+
+.circle {
+    stroke:red;
+    stroke-width:3;
+    fill:yellow;
+}

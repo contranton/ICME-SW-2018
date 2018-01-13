@@ -1,0 +1,13 @@
+Todos
+* TODO ASK CINDY ABOUT TIM DAVIS
+
+Coding projects
+
+Future coding projects
+
+Coding projects
+* TODO Code a hierarchical clustering algorithm
+* TODO Implement k-means
+** TODO K-means applied to image posterization
+* TODO Implement SOM
+* TODO Implement KNN

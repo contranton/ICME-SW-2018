@@ -1,0 +1,79 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Thu Jan 11 00:50:48 2018
+;; Desktop file format version 208
+;; Emacs version 25.1.1
+
+;; Global section:
+(setq desktop-saved-frameset nil)
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("variance" "multipl"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("c:/Users/Javier/Google Drive/UC/2018 - 1/ICMESW/MachineLearning.org" "c:/Users/Javier/Google Drive/UC/2018 - 1/ICMESW/ParallelProgramming.org"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "c:/Users/Javier/Google Drive/UC/2018 - 1/ICMESW/MachineLearning.org"
+  "MachineLearning.org"
+  'org-mode
+  '(visual-line-mode override-global-mode yas-minor-mode flycheck-mode workgroups-mode)
+  10796
+  '(10789 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos) (overwrite-mode) (truncate-lines))
+  '((mark-ring (10795 14685 22693))))
+
+(desktop-create-buffer 208
+  "c:/Users/Javier/AppData/Roaming/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(visual-line-mode override-global-mode yas-minor-mode smart-tab-mode flycheck-mode workgroups-mode)
+  7697
+  '(134 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . iso-latin-1-dos) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "c:/Users/Javier/Google Drive/UC/2018 - 1/ICMESW/Questions.org"
+  "Questions.org"
+  'org-mode
+  '(override-global-mode yas-minor-mode flycheck-mode workgroups-mode)
+  1298
+  '(964 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos) (truncate-lines . t))
+  '((mark-ring (802 1299))))
+
+(desktop-create-buffer 208
+  "c:/Users/Javier/Google Drive/UC/2018 - 1/ICMESW/ParallelProgramming.org"
+  "ParallelProgramming.org"
+  'org-mode
+  '(visual-line-mode override-global-mode yas-minor-mode flycheck-mode workgroups-mode)
+  4934
+  '(5061 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos) (truncate-lines))
+  '((mark-ring (5326 4934))))
+
+(desktop-create-buffer 208
+  "c:/Users/Javier/Google Drive/UC/2018 - 1/ICMESW/LinearAlg.org"
+  "LinearAlg.org"
+  'org-mode
+  '(override-global-mode yas-minor-mode flycheck-mode workgroups-mode)
+  12894
+  '(52 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos) (truncate-lines . t))
+  '((mark-ring (4373 13574 389 2983 8309 13574 9906 13476 13574 13574))))
+

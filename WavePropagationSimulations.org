@@ -1,0 +1,51 @@
+#+TITLE: Eficientes Simulaciones Computacionales para Fenómenos de Propagación de Ondas - Elwin van 't Wout
+
+* Elwin
+- PhD Matematicas Aplicadas en Delft University of Technology
+  - Internships en Maritime Research Institute Netherlands y Netherlands Aerospace Centre NLR
+- Trabaja ahora en Chile
+
+
+* Big Math
+Importance of numerical simulations in current scientific development. The "Third Pillar of Science" as a way to cheaply test hypotheses before expensive experimentation. 
+
+Nos ahorra problemas de etica, costos y precision.
+
+* Propagacion de ondas
+** Acústica y Electromagnetismo: Fenómenos como propagación y reflexión de ondas.
+** Propagacion de ondas electromagneticas en aviones para aplicaciones de radar
+** Tratamientos medicos con ultrasonido
+Ultrasonido es usado para quemar canceres, pero en el caso de tratamiento al higado es necesario realizarlo a traves de la costilla, la cual refleja las ondas incidentes. Es de mucha utilidad simular este comportamiento
+** Instrumentacion Astronomica
+Simulacion de como la geometria del espejo afecta el wavefront de la imagen astronomica
+** Vigilancia Subacuatica
+Efecto de cardumenes de peces en respuesta de sonar.
+Bacalaos poseen sacos de aire que se comportan como una burbuja de aire con respecto al sonar. Posee una frecuencia resonante que puede hacer que en tal frecuencia, pocos peces parezcan un submarino.
+Dificil de experimentar fisicamente.
+
+* Modelamiento matematico
+Los tres ejemplos vistos tienen elementos en comun:
+- Campo de ondas incidente
+- Hay un objeto que refleja el campo
+- Queremos conocer el campo reflejado
+ 
+* Ecuacion de Helmholtz
+Generamos ondas con una frecuencia dominante y nos ahorramos transientes complicadas.
+Usamos ondas harmonicas, definidas por la ecuacion de Helmholtz:$\nabla^2u-k^2u=0$
+
+El modelo de reflexion depende de la aplicacion - Huesos de costilla no reflejan igual que una burbuja de aire.
+
+En muchisimos casos no existen soluciones analiticas a los problemas dados. Por esto se utilizan metodos numericos.
+* Boundary Element Methods
+Funciones de Green caracterizan comportamiento de la onda en aire libre. No sabemos que ocurrira en la superficie de un objeto, pero si modelamos solo esta superficie, utilizamos la propagacion en el aire para calcular un potencial, y a partir de este calcular las ondas reflejadas.
+* Discretizacion
+  En vez de calcular para una superficie continua, discretizamos en puntos finitos para simplificar los calculos. Cada punto se vuelve un elemento de un vector 
+* Metodos de resolucion de sistemas lineales
+** Metodos Directos
+   Solucion exacta, pero costosa para sistemas grandes
+** Metodos iterativos
+   Solucion aproximada con margen de error, mas eficiente para sistemas grandes
+* Problema de Almacenamiento
+   Para la costilla de 2.5cm con ondas de 1.5mm, tenemos 479k grados de libertad.
+   Usando 2 matrices con floats de 128 bits por valor, necesitamos 64 TB!!
+   Solucion es usar representaciones /ralas/ (/sparse/)! H-matrices, akin to quad-trees.

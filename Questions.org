@@ -1,0 +1,31 @@
+* Introduction to numerical linear algebra
+** How do ML models aid in simulation where more physical laws are supposed to reign?
+1. In flow science, chaotic behaviors cannot be modeled functionally. Multi-scale models that incorporate smaller perturbations to larger behaviors
+2. Reduced-order models
+
+** Are there any uses for other decompositions
+QR and SVD: Orthogonal bases, easier to work with!
+Ill-conditioned matrices and the danger of round-off errors
+Dangerous when you combine small with large values
+** Preconditioning
+Reduces the condition of the matrix while describing the same system. An ideal would be the inverse.
+Many of them look for 'pseudo-inverses'
+** How to get started in big data
+Fundamentals encessary for a Master's program in data science:
+- Foundation in statistics and probability theory
+- Know your linear algebra
+Many industries are looking to build internal core knowledge in data science which is why they're hiring plenty in the area
+
+
+* Introduction to Machine Learning
+** Multi-dimensional self-organizing maps?
+** Is it fair to use different Ks for K-fold cross validations to compare computationally expensive methods?
+   Yes! Cross-Validation reduces bias, so despite having a relatively low K the models are comparable.
+** Is using subclassing for binary SVMs viable?
+Yes! For naturally hierarchical datasets it's the best way to go about it, and it's what services like ancestry.com and 23andme use!
+** There any methodologies for approaching Machine Learning projects?
+Begin with unsupervised learning and dimensionality reduction so that the data can be visualized. You will /always/ find problems in the data which must be fixed before significant analysis can be performed.
+
+Next step depends on data types, whether categorical or numerical. If both, random forests are a good approach. Begin with simple things, and only begin with more complex methods once you somewhat understand the data, i.e. getting a sense of the data.
+** Why would netflix change from a 1-5 star system to a like/dislike system?
+THere's a relatively higher effort needed in choosing from 5 variables rather than 2, meaning there's a lower rate of response. Even though 2 values are less informative, this is compensated by having a more complete dataset which can be better imputated to make accurate predictions.
