@@ -4,6 +4,7 @@
 
     <title>A d3 simple Neural net</title>
     <script src="d3.js"></script>
+    <script src="jquery-3.2.1.slim.js"></script>
     
 </head>
 
@@ -20,11 +21,14 @@
 
      var layers = [1, 3, 5, 2, 1];
 
-     d3.select(".d3-viz")
-       .append ("svg")
-       .attr ("id", "nn-d3")
-       .attr ("width", "1000")
-       .attr ("height", "400");
+     var width = 1000;
+     var height = 400;
+     
+     svg = d3.select(".d3-viz")
+	     .append ("svg")
+	     .attr ("id", "nn-d3")
+	     .attr ("width", width)
+	     .attr ("height", height);
 
      var c_r = 10;
      
@@ -46,15 +50,14 @@
 		     var kx = 10 + (i+1)*get_h_step() - c_r;
 		     var ky = (k + 1)*get_v_step(i+1);
 		     
-		     d3.select("#nn-d3")
-		       .append("line")
-		       .attr("x1", x)
-		       .attr("x2", kx)
-		       .attr("y1", y)
-		       .attr("y2", ky)
-		       .style("stroke","rgb(255,0,0)")
-		       .style("stroke-width","2")
-		       .style("opacity","0.4");
+		     svg.append("line")
+			.attr("x1", x)
+			.attr("x2", kx)
+			.attr("y1", y)
+			.attr("y2", ky)
+			.style("stroke","rgb(255,0,0)")
+			.style("stroke-width","2")
+			.style("opacity","0.4");
 		 }
 	     } 
 	 }
@@ -63,19 +66,64 @@
 	 // Draw our circles
 	 for (var i = 0; i < layers.length; i++){
 	     for (var j = 0; j < layers[i]; j++){
-		 d3.select("#nn-d3")
-		   .append ("circle")
+		 svg.append ("circle")
 		 //.attr ("id", ""+i+","+j)
-		   .attr ("cx", 10 + i * get_h_step())
-		   .attr ("cy", (j + 1) * get_v_step(i))
-		   .attr ("r", c_r)
-		   .attr ("fill", "teal")
-		   .attr ("opacity", "0.25");
+		    .attr ("cx", 10 + i * get_h_step())
+		    .attr ("cy", (j + 1) * get_v_step(i))
+		    .attr ("r", c_r)
+		    .attr ("fill", "teal")
+		    .attr ("opacity", "0.25");
 	     }
 	 }
 
+	 // Input thingies
+	 svg.selectAll(".btn-down")
+	    .data(layers)
+	    .enter()
+	 // Up rectangles
+	    .append("rect")
+	    .attr("class","btn-down")
+	    .attr("width", 20)
+	    .attr("height", 20)
+	    .attr("x", function(d, i){return i*get_h_step() + 10;}) 
+	    .attr("y", height - 50)
+	    .attr("fill", "teal")
+	    .on("mouseover",function(){
+		d3.select(this).attr("fill","orange")
+	    })
+	    .on("mouseout",function(){
+		d3.select(this).attr("fill","teal")
+	    })
+	    .on("click",function(d, i){
+		layers[i] = Math.min(layers[i]+1, 100);
+		draw(layers);
+	    }) 
+	    .text(layers[i]);
+	 // Down rectangles
+	 
+	 svg.selectAll(".btn-up")
+	    .data(layers)
+	    .enter()
+	    .append("rect")
+	    .attr("class", "btn-up")
+	    .attr("width", 20)
+	    .attr("height", 20)
+	    .attr("x", function(d, i){return i*get_h_step() - 10;}) 
+	    .attr("y", height - 50)
+	    .attr("fill", "green")
+	    .on("mouseover",function(){
+		d3.select(this).attr("fill","orange")
+	    })
+	    .on("mouseout",function(){
+		d3.select(this).attr("fill","green")
+	    })
+	    .on("click",function(d, i){
+		layers[i] = Math.max(layers[i]-1, 0);
+		draw(layers);
+	    })
+	    .text(layers[i]);
+	 
      }
-
      draw(layers);
      
     </script>
