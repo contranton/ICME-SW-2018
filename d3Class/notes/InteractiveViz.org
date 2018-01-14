@@ -1,5 +1,5 @@
 #+TITLE: Interactive data vizualization with D3.js
-
+#+HTML_HEAD: <link rel="stylesheet" href="../../css/style.css">
 
 * Day 1
 ** Introduction

@@ -1,4 +1,5 @@
 #+TITLE: Linear Algebra in AI - Margot Gerritsen
+#+HTML_HEAD: <link rel="stylesheet" href="../css/style.css">
 
 
 * Data Science Primer
